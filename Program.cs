@@ -4,10 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using PizzaStore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-// var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
+var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
     
 builder.Services.AddEndpointsApiExplorer();
+
+// In memory
 // builder.Services.AddDbContext<PizzaDb>(options => options.UseInMemoryDatabase("items"));
+
+// Sql lite
+builder.Services.AddSqlite<PizzaDb>(connectionString);
 
 builder.Services.AddSwaggerGen(c =>
 {
